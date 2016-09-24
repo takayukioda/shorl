@@ -1,0 +1,28 @@
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
+  volumes:
+    # This volume gets mapped to docker/redis, it stores the redis append-only file
+    - $PWD/redis:/data
+  user: "999:999"
+  # Using "--appendonly yes" means redis will write to a file in docker/redis/
+  # which will persist our data over container restarts
+  command: redis-server --appendonly yes
+
+pg:
+  image: postgres:9.5
+  ports:
+    - "5432:5432"
+  volumes:
+    # This volume gets mapped to docker/pg, it stores the database files
+    # so our data will survive across container restarts
+    - $PWD/pg:/var/lib/postgresql/data/pgdata
+
+    # This is a convenience volume
+    - $PWD/../sql:/sqlscripts
+  environment:
+    - PGDATA=/var/lib/postgresql/data/pgdata
+    - POSTGRES_DB=codeprep
+    - POSTGRES_USER=codeprep
+    - POSTGRES_PASSWORD=testPassword
