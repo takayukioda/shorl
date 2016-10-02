@@ -9,6 +9,9 @@ case $1 in
 	down|stop)
 		(cd $SCRIPT_DIR/docker && docker-compose down)
 		;;
+	ps|status)
+		(cd $SCRIPT_DIR/docker && docker-compose ps)
+		;;
 	upndown|restart)
 		(cd $SCRIPT_DIR/docker && docker-compose restart)
 		;;
@@ -28,7 +31,7 @@ case $1 in
 		{
 			echo "unknow command"
 			echo "usage:"
-			echo "$0 [up|down|restart|ssh-pg|psql|redis|logs]"
+			echo "$0 [up|down|restart|ps|ssh-pg|psql|redis|logs]"
 		} 1>&2
 		;;
 esac
