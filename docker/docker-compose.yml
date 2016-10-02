@@ -1,0 +1,22 @@
+version: '2'
+services:
+  pg:
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - $PWD/pg/data:/var/lib/postgresql/data/pgdata
+      - $PWD/pg/initdb:/docker-entrypoint-initdb.d
+      - $PWD/../sqls:/sqls
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_DB=shorl
+      - POSTGRES_USER=pg
+      - POSTGRES_PASSWORD=passwd
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - $PWD/redis:/data
+    command: redis-server --appendonly yes
