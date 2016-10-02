@@ -21,11 +21,14 @@ case $1 in
 	redis)
 		(cd $SCRIPT_DIR/docker && docker-compose exec redis /bin/bash -c 'redis-cli')
 		;;
+	logs)
+		(cd $SCRIPT_DIR/docker && docker-compose logs)
+		;;
 	*)
 		{
 			echo "unknow command"
 			echo "usage:"
-			echo "$0 [up|down|restart|ssh-pg|psql|redis]"
+			echo "$0 [up|down|restart|ssh-pg|psql|redis|logs]"
 		} 1>&2
 		;;
 esac
