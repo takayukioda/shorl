@@ -4,28 +4,28 @@ DATABASE := shorl
 default: usage
 
 up:
-	(cd $(THISDIR)/docker && docker-compose up -d)
+	(cd $(THISDIR)docker && docker-compose up -d)
 
 down:
-	(cd $(THISDIR)/docker && docker-compose down)
+	(cd $(THISDIR)docker && docker-compose down)
 
 restart:
-	(cd $(THISDIR)/docker && docker-compose restart)
+	(cd $(THISDIR)docker && docker-compose restart)
 
 ps:
-	(cd $(THISDIR)/docker && docker-compose ps)
+	(cd $(THISDIR)docker && docker-compose ps)
 
 log:
-	(cd $(THISDIR)/docker && docker-compose logs)
+	(cd $(THISDIR)docker && docker-compose logs)
 
 ssh-pg:
-	(cd $(THISDIR)/docker && docker-compose exec --user postgres pg /bin/bash)
+	(cd $(THISDIR)docker && docker-compose exec --user postgres pg /bin/bash)
 
 psql:
-	(cd $(THISDIR)/docker && docker-compose exec --user postgres pg /bin/bash -c 'psql -Upg  -d$(DATABASE)')
+	(cd $(THISDIR)docker && docker-compose exec --user postgres pg /bin/bash -c 'psql -Upg  -d$(DATABASE)')
 
 redis:
-	(cd $(THISDIR)/docker && docker-compose exec redis /bin/bash -c 'redis-cli')
+	(cd $(THISDIR)docker && docker-compose exec redis /bin/bash -c 'redis-cli')
 
 usage:
 	@echo "Usage:"
